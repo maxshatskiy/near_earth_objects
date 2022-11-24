@@ -29,12 +29,19 @@ def write_to_csv(results, filename):
         'datetime_utc', 'distance_au', 'velocity_km_s',
         'designation', 'name', 'diameter_km', 'potentially_hazardous'
     )
-    with open(filename,'w') as f:
+    with open(filename, 'w') as f:
         writer = csv.writer(f)
         writer.writerow(fieldnames)
         for ca in results:
-            row = (datetime_to_str(ca.time), ca.distance, ca.velocity, ca.neo.designation, '' if ca.neo.name is None else ca.neo.name,
-                   '' if ca.neo.diameter is None else ca.neo.diameter, 'True' if ca.neo.hazardous else 'False')
+            row = (
+                datetime_to_str(
+                    ca.time),
+                ca.distance,
+                ca.velocity,
+                ca.neo.designation,
+                '' if ca.neo.name is None else ca.neo.name,
+                '' if ca.neo.diameter is None else ca.neo.diameter,
+                'True' if ca.neo.hazardous else 'False')
 
             writer.writerow(row)
 
@@ -51,16 +58,14 @@ def write_to_json(results, filename):
     :param filename: A Path-like object pointing to where the data should be saved.
     """
     with open(filename, 'w') as f:
-        data=[]
+        data = []
         for ca in results:
             data.append({"datetime_utc": datetime_to_str(ca.time),
                          "distance_au": ca.distance,
-                         "velocity_km_s":ca.velocity,
+                         "velocity_km_s": ca.velocity,
                          "neo": {"designation": ca.neo.designation,
-                         "name":'' if ca.neo.name is None else ca.neo.name,
-                         "diameter_km":'NaN' if ca.neo.diameter is None else ca.neo.diameter,
-                         "potentially_hazardous": False if ca.neo.hazardous else True}
-                         }
-            )
+                                 "name": '' if ca.neo.name is None else ca.neo.name,
+                                 "diameter_km": 'NaN' if ca.neo.diameter is None else ca.neo.diameter,
+                                 "potentially_hazardous": False if ca.neo.hazardous else True}})
 
         json.dump(data, f, indent=2, default=str)

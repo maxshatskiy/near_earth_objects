@@ -33,7 +33,14 @@ class NearEarthObject:
     initialized to an empty collection, but eventually populated in the
     `NEODatabase` constructor.
     """
-    def __init__(self, designation: str, name:str=None, diameter:float=float('nan'), hazardous:bool=False, **info):
+
+    def __init__(
+            self,
+            designation: str,
+            name: str = None,
+            diameter: float = float('nan'),
+            hazardous: bool = False,
+            **info):
         """Create a new `NearEarthObject`.
         :param designation: a string. represents primary designation.
         :param name: a string. represents name.
@@ -53,7 +60,7 @@ class NearEarthObject:
     @property
     def fullname(self):
         """Return a representation of the full name of this NEO."""
-        self.fullname = self.designation +'_'+self.name
+        self.fullname = self.designation + '_' + self.name
 
         return self.fullname
 
@@ -83,8 +90,15 @@ class CloseApproach:
     `NEODatabase` constructor.
     """
 
-    def __init__(self, time, distance:Union[float,int]=0.0, velocity:Union[float,int]=0.0, designation:str=None,
-                 neo:type(NearEarthObject)=None, **info):
+    def __init__(self,
+                 time,
+                 distance: Union[float,
+                                 int] = 0.0,
+                 velocity: Union[float,
+                                 int] = 0.0,
+                 designation: str = None,
+                 neo: type(NearEarthObject) = None,
+                 **info):
         """Create a new `CloseApproach`.
         :param time: The date and time, in UTC, at which the NEO passes closest to Earth. For example,
                      December 31st, 2020 at noon is: 2020-Dec-31 12:00

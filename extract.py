@@ -42,7 +42,14 @@ def load_neos(neo_csv_path):
 
             collection_of_neo.append(elem)
 
-    return [NearEarthObject(designation=neo['pdes'], name=neo['name'], diameter=float(neo['diameter']), hazardous=neo['pha']) for neo in collection_of_neo]
+    return [
+        NearEarthObject(
+            designation=neo['pdes'],
+            name=neo['name'],
+            diameter=float(
+                neo['diameter']),
+            hazardous=neo['pha']) for neo in collection_of_neo]
+
 
 def load_approaches(cad_json_path):
     """Read close approach data from a JSON file.
@@ -54,7 +61,14 @@ def load_approaches(cad_json_path):
         content = json.load(f)
         fields = content["fields"]
         collection_of_ca_objects = []
-        collection_of_ca = [dict(zip(fields,ca)) for ca in content["data"]]
+        collection_of_ca = [dict(zip(fields, ca)) for ca in content["data"]]
 
-    return [CloseApproach(time=ca['cd'], distance=float(ca['dist']), velocity=float(ca['v_rel']), designation=ca['des'],
-    neo=None) for ca in collection_of_ca]
+    return [
+        CloseApproach(
+            time=ca['cd'],
+            distance=float(
+                ca['dist']),
+            velocity=float(
+                ca['v_rel']),
+            designation=ca['des'],
+            neo=None) for ca in collection_of_ca]

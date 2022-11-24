@@ -38,6 +38,7 @@ class AttributeFilter:
     Concrete subclasses can override the `get` classmethod to provide custom
     behavior to fetch a desired attribute from the given `CloseApproach`.
     """
+
     def __init__(self, op, value):
         """Construct a new `AttributeFilter` from an binary predicate and a reference value.
 
@@ -71,55 +72,66 @@ class AttributeFilter:
     def __repr__(self):
         return f"{self.__class__.__name__}(op=operator.{self.op.__name__}, value={self.value})"
 
+
 class DateFilter(AttributeFilter):
     @classmethod
     def get(cls, approach):
         return approach.time.date()
+
 
 class StartDateFilter(AttributeFilter):
     @classmethod
     def get(cls, approach):
         return approach.time.date()
 
+
 class EndDateFilter(AttributeFilter):
     @classmethod
     def get(cls, approach):
         return approach.time.date()
+
 
 class DistanceMinFilter(AttributeFilter):
     @classmethod
     def get(cls, approach):
         return approach.distance
 
+
 class DistanceMaxFilter(AttributeFilter):
     @classmethod
     def get(cls, approach):
         return approach.distance
+
 
 class VelocityMinFilter(AttributeFilter):
     @classmethod
     def get(cls, approach):
         return approach.velocity
 
+
 class VelocityMaxFilter(AttributeFilter):
     @classmethod
     def get(cls, approach):
         return approach.velocity
+
 
 class DiameterMinFilter(AttributeFilter):
     @classmethod
     def get(cls, approach):
         return approach.neo.diameter
 
+
 class DiameterMaxFilter(AttributeFilter):
     @classmethod
     def get(cls, approach):
         return approach.neo.diameter
 
+
 class HazardFilter(AttributeFilter):
     @classmethod
     def get(cls, approach):
         return approach.neo.hazardous
+
 
 def create_filters(
         date=None, start_date=None, end_date=None,
@@ -157,8 +169,6 @@ def create_filters(
     :param hazardous: Whether the NEO of a matching `CloseApproach` is potentially hazardous.
     :return: A collection of filters for use with `query`.
     """
-
-
 
     filter = []
     if date is not None:
