@@ -42,13 +42,13 @@ class NearEarthObject:
             hazardous: bool = False,
             **info):
         """Create a new `NearEarthObject`.
+
         :param designation: a string. represents primary designation.
         :param name: a string. represents name.
         :param diameter: a flot. represents diameter of the object.
         :param hazardous: a boolean. represents if the object is hazardous to Earth or not.
         :param info: A dictionary of excess keyword arguments supplied to the constructor.
         """
-
         self.designation = designation
         self.name = name
         self.diameter = diameter
@@ -66,7 +66,6 @@ class NearEarthObject:
 
     def __str__(self):
         """Return `str(self)`."""
-
         return f"A NearEarthObject named {self.name!s} with a diameter={self.diameter:.3f} moves "\
                f"to {self.designation!s} and is {'hazardous.' if self.hazardous else 'not hazardous.'}"
 
@@ -100,6 +99,7 @@ class CloseApproach:
                  neo: type(NearEarthObject) = None,
                  **info):
         """Create a new `CloseApproach`.
+
         :param time: The date and time, in UTC, at which the NEO passes closest to Earth. For example,
                      December 31st, 2020 at noon is: 2020-Dec-31 12:00
         :param distance: The nominal approach distance, in astronomical units, of the NEO to Earth at the closest point.

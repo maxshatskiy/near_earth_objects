@@ -70,66 +70,170 @@ class AttributeFilter:
         raise UnsupportedCriterionError
 
     def __repr__(self):
+        """Return a class' objects as a string.
+
+        :return: a string representing class' object
+        """
         return f"{self.__class__.__name__}(op=operator.{self.op.__name__}, value={self.value})"
 
 
 class DateFilter(AttributeFilter):
+    """A class for filter by date, which inherits from AttributeFilter superclass."""
+
     @classmethod
     def get(cls, approach):
+        """Get an date attribute from a close approach.
+
+        Concrete subclasses must override this method to get an attribute of
+        interest from the supplied `CloseApproach`.
+
+        :param approach: A `CloseApproach` on which to evaluate this filter.
+        :return: The value of the date attribute.
+        """
         return approach.time.date()
 
 
 class StartDateFilter(AttributeFilter):
+    """A class for filter by start date, which inherits from AttributeFilter superclass."""
+
     @classmethod
     def get(cls, approach):
+        """Get an date attribute from a close approach.
+
+        Concrete subclasses must override this method to get an attribute of
+        interest from the supplied `CloseApproach`.
+
+        :param approach: A `CloseApproach` on which to evaluate this filter.
+        :return: The value of the date attribute.
+        """
         return approach.time.date()
 
 
 class EndDateFilter(AttributeFilter):
+    """A class for filter by end date, which inherits from AttributeFilter superclass."""
+
     @classmethod
     def get(cls, approach):
+        """Get an date attribute from a close approach.
+
+        Concrete subclasses must override this method to get an attribute of
+        interest from the supplied `CloseApproach`.
+
+        :param approach: A `CloseApproach` on which to evaluate this filter.
+        :return: The value of the date attribute.
+        """
         return approach.time.date()
 
 
 class DistanceMinFilter(AttributeFilter):
+    """A class for filter by min. distance, which inherits from AttributeFilter superclass."""
+
     @classmethod
     def get(cls, approach):
+        """Get a distance attribute from a close approach.
+
+        Concrete subclasses must override this method to get an attribute of
+        interest from the supplied `CloseApproach`.
+
+        :param approach: A `CloseApproach` on which to evaluate this filter.
+        :return: The value of the date attribute.
+        """
         return approach.distance
 
 
 class DistanceMaxFilter(AttributeFilter):
+    """A class for filter by max distance, which inherits from AttributeFilter superclass."""
+
     @classmethod
     def get(cls, approach):
+        """Get a distance attribute from a close approach.
+
+        Concrete subclasses must override this method to get an attribute of
+        interest from the supplied `CloseApproach`.
+
+        :param approach: A `CloseApproach` on which to evaluate this filter.
+        :return: The value of the date attribute.
+        """
         return approach.distance
 
 
 class VelocityMinFilter(AttributeFilter):
+    """A class for filter by min velocity, which inherits from AttributeFilter superclass."""
+
     @classmethod
     def get(cls, approach):
+        """Get a velocity attribute from a close approach.
+
+        Concrete subclasses must override this method to get an attribute of
+        interest from the supplied `CloseApproach`.
+
+        :param approach: A `CloseApproach` on which to evaluate this filter.
+        :return: The value of the date attribute.
+        """
         return approach.velocity
 
 
 class VelocityMaxFilter(AttributeFilter):
+    """A class for filter by max velocity, which inherits from AttributeFilter superclass."""
+
     @classmethod
     def get(cls, approach):
+        """Get a velocity attribute from a close approach.
+
+        Concrete subclasses must override this method to get an attribute of
+        interest from the supplied `CloseApproach`.
+
+        :param approach: A `CloseApproach` on which to evaluate this filter.
+        :return: The value of the date attribute.
+        """
         return approach.velocity
 
 
 class DiameterMinFilter(AttributeFilter):
+    """A class for filter by min diameter, which inherits from AttributeFilter superclass."""
+
     @classmethod
     def get(cls, approach):
+        """Get a diameter attribute from a neo associated with a close approach.
+
+        Concrete subclasses must override this method to get an attribute of
+        interest from the supplied `CloseApproach`.
+
+        :param approach: A `CloseApproach` on which to evaluate this filter.
+        :return: The value of the date attribute.
+        """
         return approach.neo.diameter
 
 
 class DiameterMaxFilter(AttributeFilter):
+    """A class for filter by max diameter, which inherits from AttributeFilter superclass."""
+
     @classmethod
     def get(cls, approach):
+        """Get a diameter attribute from a neo associated with a close approach.
+
+        Concrete subclasses must override this method to get an attribute of
+        interest from the supplied `CloseApproach`.
+
+        :param approach: A `CloseApproach` on which to evaluate this filter.
+        :return: The value of the date attribute.
+        """
         return approach.neo.diameter
 
 
 class HazardFilter(AttributeFilter):
+    """A class for filter by hazardous attribute, which inherits from AttributeFilter superclass."""
+
     @classmethod
     def get(cls, approach):
+        """Get a hazardous attribute from a neo associated with a close approach.
+
+        Concrete subclasses must override this method to get an attribute of
+        interest from the supplied `CloseApproach`.
+
+        :param approach: A `CloseApproach` on which to evaluate this filter.
+        :return: The value of the date attribute.
+        """
         return approach.neo.hazardous
 
 
@@ -169,7 +273,6 @@ def create_filters(
     :param hazardous: Whether the NEO of a matching `CloseApproach` is potentially hazardous.
     :return: A collection of filters for use with `query`.
     """
-
     filter = []
     if date is not None:
         filter.append(DateFilter(operator.eq, date))
@@ -209,7 +312,6 @@ def limit(iterator, n=None):
     :param n: The maximum number of values to produce.
     :yield: The first (at most) `n` values from the iterator.
     """
-
     for id, item in enumerate(iterator):
 
         if n == 0 or n is None:
